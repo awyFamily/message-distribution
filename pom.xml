@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.awyFamily</groupId>
+    <artifactId>message-distribution</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>11</java.version>
+<!--        <spring.boot.version>2.5.5.RELEASE</spring.boot.version>-->
+        <spring.boot.version>2.5.6</spring.boot.version>
+        <spring.cloud.version>Hoxton.SR12</spring.cloud.version>
+        <mysql.connector.java.version>8.0.16</mysql.connector.java.version>
+        <mybatis.plus.version>3.4.3</mybatis.plus.version>
+        <knife4j.version>2.0.7</knife4j.version>
+        <hutool.version>5.7.14</hutool.version>
+        <mqttv3.version>1.2.1</mqttv3.version>
+        <vertx.mqtt.version>4.2.5</vertx.mqtt.version>
+        <vertx.rabbit.version>4.3.0</vertx.rabbit.version>
+        <lombok.version>1.18.6</lombok.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <log4j.version>2.13.3</log4j.version>
+        <message.distribution.version>1.0-SNAPSHOT</message.distribution.version>
+        <awy.common.version>2.0-SNAPSHOT</awy.common.version>
+        <project.sourceEncoding>UTF-8</project.sourceEncoding>
+        <org.apache.maven.plugins.version>3.8.0</org.apache.maven.plugins.version>
+        <docker.plugins.version>1.2.0</docker.plugins.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <modules>
+        <module>distribution-core</module>
+        <module>distribution-admin</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!--工具包开始 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.paho</groupId>
+                <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+                <version>${mqttv3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-mqtt</artifactId>
+                <version>${vertx.mqtt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-rabbitmq-client</artifactId>
+                <version>${vertx.rabbit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>[1.18,)</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <!--Lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!--工具包结束 -->
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>test/*</exclude>
+                </excludes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${org.apache.maven.plugins.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>${project.sourceEncoding}</encoding>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${org.apache.maven.plugins.version}</version>
+                    <configuration>
+                        <attach>true</attach>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker.plugins.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <imageName>awyFamily/${project.name}:latest</imageName>
+                        <env>
+                            <TZ>Asia/Shanghai</TZ>
+                        </env>
+                        <dockerDirectory>${project.basedir}</dockerDirectory>
+                        <resources>
+                            <resource>
+                                <targetPath>/</targetPath>
+                                <directory>${project.build.directory}</directory>
+                                <include>${project.build.finalName}.jar</include>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>
