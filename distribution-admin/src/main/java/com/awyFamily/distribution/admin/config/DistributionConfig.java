@@ -1,6 +1,7 @@
 package com.awyFamily.distribution.admin.config;
 
 import cn.hutool.json.JSONUtil;
+import com.awyFamily.message.distribution.core.customize.SimpleMqttSenderSubscriberProvider;
 import com.awyFamily.message.distribution.core.manager.ISenderManager;
 import com.awyFamily.message.distribution.core.manager.ISubscriberManager;
 import com.awyFamily.message.distribution.core.manager.SimpleSenderProviderManager;
@@ -33,6 +34,14 @@ import java.util.stream.Collectors;
 @Configuration
 public class DistributionConfig {
 
+    /**
+     * @return 发送,订阅提供者
+     */
+    @Bean
+    public SimpleMqttSenderSubscriberProvider simpleMqttSenderSubscriberProvider() {
+        return new SimpleMqttSenderSubscriberProvider();
+    }
+
     @Bean
     public ISenderManager simpleSenderProviderManager() {
         List<SenderConfig> configs = new ArrayList<>();
@@ -54,6 +63,7 @@ public class DistributionConfig {
         List<ISenderProvider > providers = new ArrayList<>();
         providers.add(new SimpleHttpSenderProvider());
         providers.add(new SimpleRabbitSenderProvider());
+        providers.add(simpleMqttSenderSubscriberProvider());
 
         return new SimpleSenderProviderManager(configMap,providers);
     }
@@ -84,7 +94,8 @@ public class DistributionConfig {
         configs.add(config);
 
         List<ISubscriberProvider > providers = new ArrayList<>();
-        providers.add(new SimpleMqttSubscriberProvider());
+//        providers.add(new SimpleMqttSubscriberProvider());
+        providers.add(simpleMqttSenderSubscriberProvider());
         providers.add(new SimpleRabbitSubscriberProvider());
         return new SimpleSubscriberManager(configs,providers);
     }

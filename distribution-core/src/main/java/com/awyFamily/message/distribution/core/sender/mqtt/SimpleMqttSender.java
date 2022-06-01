@@ -1,5 +1,6 @@
 package com.awyFamily.message.distribution.core.sender.mqtt;
 
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.awyFamily.message.distribution.core.model.sender.MessagePayload;
 import com.awyFamily.message.distribution.core.model.sender.SenderTypeEnum;
@@ -34,7 +35,7 @@ public class SimpleMqttSender implements ISender<HashMap> {
     }
 
     @Override
-    public Mono<Void> send(MessagePayload<HashMap> payload) {
+    public Mono<Void> send(MessagePayload<HashMap> payload, String topic, JSONObject expands) {
         MqttMessage mqMsg = new MqttMessage(JSONUtil.toJsonStr(payload.getPayloadMessage()).getBytes());
         client.publish(topic, mqMsg);
         return Mono.empty();

@@ -1,6 +1,7 @@
 package com.awyFamily.message.distribution.core.sender.rabbit;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.awyFamily.message.distribution.core.model.sender.MessagePayload;
 import com.awyFamily.message.distribution.core.model.sender.SenderTypeEnum;
@@ -36,11 +37,11 @@ public class SimpleRabbitSender implements ISender<HashMap> {
 
     @Override
     public String getTopic() {
-        return this.exchange + getRoutingKey();
+        return this.exchange;
     }
 
     @Override
-    public Mono<Void> send(MessagePayload<HashMap> payload) {
+    public Mono<Void> send(MessagePayload<HashMap> payload, String exchange, JSONObject expands) {
         VertxRabbitMessage mqMsg = new VertxRabbitMessage(Buffer.buffer(JSONUtil.toJsonStr(payload.getPayloadMessage())));
         client.publish(exchange,getRoutingKey(), mqMsg);
         return Mono.empty();

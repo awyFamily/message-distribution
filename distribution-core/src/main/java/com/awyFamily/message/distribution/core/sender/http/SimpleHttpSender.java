@@ -1,6 +1,7 @@
 package com.awyFamily.message.distribution.core.sender.http;
 
 import cn.hutool.http.HttpRequest;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.awyFamily.message.distribution.core.model.sender.MessagePayload;
 import com.awyFamily.message.distribution.core.model.sender.SenderTypeEnum;
@@ -35,10 +36,10 @@ public class SimpleHttpSender implements ISender<HashMap> {
     }
 
     @Override
-    public Mono<Void> send(MessagePayload<HashMap> payload) {
+    public Mono<Void> send(MessagePayload<HashMap> payload, String topic, JSONObject expands) {
         return Mono.fromCallable(() -> {
 
-            String result = HttpRequest.post(this.host).body(JSONUtil.toJsonStr(payload.getPayloadMessage()))
+            String result = HttpRequest.post(topic).body(JSONUtil.toJsonStr(payload.getPayloadMessage()))
                     .execute()
                     .body();
             log.info("result : {} ",result);
